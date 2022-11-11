@@ -23,21 +23,18 @@ namespace _12F_Mozgo_dolog
 			//MessageBox.Show("szia!");
 
 			Mozgo.Összes_lerajzolása(pictureBox1);
-
-
-
 		}
 
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			for (int i = 0; i < 10; i++)
-			{
-				Thread.Sleep(200);
-				mozgo.Lépj();
-				mozgo2.Lépj();
-				Mozgo.Összes_lerajzolása(pictureBox1);
-			}
+			Mozgo.fut = true;
+			Mozgo.Szimuláció(pictureBox1, label2);
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			Mozgo.fut = false;
 		}
 	}
 }
