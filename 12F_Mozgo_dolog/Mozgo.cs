@@ -54,10 +54,13 @@ namespace _12F_Mozgo_dolog
 			double d = this.Távolsága_ettől(that); // ez is vektoraritmetika!
 			double dnegyzet = d * d;
 			double elmozdulasvektor_nagysaga = that.tomeg / dnegyzet;
+
 			Vektor jó_irányba_mutató_vektor = that.hely - this.hely; // egy komplett vektoraritmetikát ki kell majd dolgoznunk!
-			Vektor egységvektor;// John Carmack! 
+			Vektor egységvektor = jó_irányba_mutató_vektor / d;// John Carmack! 
 			return ;
 		}
+
+		private double Távolsága_ettől(Mozgo that) => (this.hely - that.hely).Hossz();
 
 		public void Lerajzol(Graphics g)
 		{

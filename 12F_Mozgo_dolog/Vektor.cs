@@ -18,6 +18,9 @@ namespace _12F_Mozgo_dolog
 		}
 
 		public static Vektor operator +(Vektor a, Vektor b) => new Vektor(a.X + b.X, a.Y + b.Y);
+		public static Vektor operator -(Vektor a, Vektor b) => new Vektor(a.X - b.X, a.Y - b.Y);
+		public static Vektor operator /(Vektor a, double d) => new Vektor(a.X / d, a.Y / d);
+		public double Hossz() => Math.Sqrt(X * X + Y * Y);
 
 		public Point ToPoint() => new Point((int)Math.Round(X), (int)Math.Round(Y));
 
