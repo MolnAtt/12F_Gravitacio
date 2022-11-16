@@ -17,6 +17,7 @@ namespace _12F_Mozgo_dolog
 		Color szin;
 		SolidBrush kemenyecset;
 		static List<Mozgo> lista = new List<Mozgo>(); // ezt muszáj itt inicializálni most.
+		List<Vektor> elmozdulasai;
 
 		public Mozgo(Vektor hely, Vektor sebesseg, int tomeg, Color szin)
 		{
@@ -25,6 +26,7 @@ namespace _12F_Mozgo_dolog
 			this.tomeg = tomeg;
 			this.szin = szin;
 			this.kemenyecset = new SolidBrush(szin);
+			this.elmozdulasai = new List<Vektor>();
 			Mozgo.lista.Add(this);
 		}
 
@@ -41,11 +43,46 @@ namespace _12F_Mozgo_dolog
 			{
 				Thread.Sleep(20);
 				idő++;
+				Mozgo.Összes_eredő_kiszámítása();
+				Mozgo.Összes_sebesség_update();
 				Mozgo.Összes_léptetése();
 				Mozgo.Összes_lerajzolása(pictureBox1);
 				időlabel.Text = idő.ToString();
 				időlabel.Refresh();
 				Application.DoEvents();
+			}
+		}
+
+
+
+
+		private static void Összes_sebesség_update()
+		{
+			for (int i = 0; i < Mozgo.lista.Count; i++)
+			{
+				Mozgo.lista[i].sebesség_update();
+			}
+		}
+
+		private void sebesség_update()
+		{
+			for (int i = 0; i < this.elmozdulasai.Count; i++)
+			{
+				this.sebesseg += this.elmozdulasai[i];
+			}
+		}
+
+		private static void Összes_eredő_kiszámítása()
+		{
+			for (int i = 0; i < Mozgo.lista.Count; i++)
+			{
+				for (int j = 0; j < Mozgo.lista.Count; j++)
+				{
+					if (i!=j)
+					{
+						Mozgo.lista[i].elmozdulasai.Add(Mozgo.lista[i].Tömegvonzás(Mozgo.lista[j]));
+					}
+				}
 			}
 		}
 
@@ -57,8 +94,10 @@ namespace _12F_Mozgo_dolog
 
 			Vektor jó_irányba_mutató_vektor = that.hely - this.hely; // egy komplett vektoraritmetikát ki kell majd dolgoznunk!
 			Vektor egységvektor = jó_irányba_mutató_vektor / d;// John Carmack! 
-			return ;
+			return egységvektor * elmozdulasvektor_nagysaga;
 		}
+
+
 
 		private double Távolsága_ettől(Mozgo that) => (this.hely - that.hely).Hossz();
 

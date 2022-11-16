@@ -13,8 +13,8 @@ namespace _12F_Mozgo_dolog
 {
 	public partial class Form1 : Form
 	{
-		Mozgo mozgo = new Mozgo(new Vektor(90, 90), new Vektor(7, 4), 30, Color.Navy);
-		Mozgo mozgo2 = new Mozgo(new Vektor(30, 60), new Vektor(-3, 2.5), 20, Color.Black);
+		Mozgo mozgo = new Mozgo(new Vektor(90, 90), new Vektor(1, 1), 30, Color.Navy);
+		Mozgo mozgo2 = new Mozgo(new Vektor(30, 60), new Vektor(1, -1), 20, Color.Black);
 
 		public Form1()
 		{
